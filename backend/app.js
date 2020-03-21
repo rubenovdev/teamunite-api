@@ -19,9 +19,7 @@ app.get("/", (req, res) => {
   res.status(200).json({
     status: "success",
     results: projects.length,
-    data: {
-      // projects get it from mongoDB
-    }
+    data: "Im data"
   });
 });
 
