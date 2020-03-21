@@ -7,9 +7,11 @@ const insertProjects = require("./queries").insertProjects;
 const findDocuments = require("./queries").findDocuments;
 
 // Connection URL
-const url = process.env.MONGO_DB_ADDRESS
-  ? "mongodb://localhost:27017"
-  : process.env.MONGO_DB_ADDRESS;
+// const url = process.env.MONGO_DB_ADDRESS
+//   ? "mongodb://localhost:27017"
+//   : process.env.MONGO_DB_ADDRESS;
+const url =
+  "mongodb+srv://Daria:12e9843Zi1iBipDye3ve6TUBv5@cluster0-8pzqh.mongodb.net/test?retryWrites=true&w=majority";
 
 // Database Name
 const dbName = "teamunite";
