@@ -4,8 +4,8 @@
   "description": "### Работа с репозиторием",
   "main": "server.js",
   "scripts": {
-    "start": "MONGO_DB_ADDRESS=mongodb://localhost:27017 nodemon server.js",
-    "start:local": "node server.js",
+    "start:local": "MONGO_DB_ADDRESS=mongodb://localhost:27017 nodemon server.js",
+    "start": "node server.js",
     "dev": "nodemon server.js"
   },
   "repository": {
