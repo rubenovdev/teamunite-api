@@ -31,17 +31,16 @@ const findDocuments = require("./queries").findDocuments;
 // });
 // });
 
-// const MongoClient = require("mongodb").MongoClient;
 const uri =
   "mongodb+srv://DariaPopova:12e9843Zi1iBipDye3ve6TUBv5@cluster0-8pzqh.mongodb.net/test?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true });
 client.connect(err => {
   console.log("Connected successfully to server");
-  // const collection = client.db("teamunite").collection("projects");
-  // findDocuments("projects", function() {
-  client.close();
+  const db = client.db("projects");
+  findDocuments(db, function() {
+    client.close();
+  });
 });
-// });
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
