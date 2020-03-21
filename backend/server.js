@@ -26,10 +26,8 @@ client.connect(function(err) {
 
   const db = client.db(dbName);
 
-  insertProjects(db, function() {
-    findDocuments(db, function() {
-      client.close();
-    });
+  findDocuments(db, function() {
+    client.close();
   });
 });
 
