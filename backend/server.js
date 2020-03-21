@@ -38,10 +38,10 @@ const client = new MongoClient(uri, { useNewUrlParser: true });
 client.connect(err => {
   console.log("Connected successfully to server");
   // const collection = client.db("teamunite").collection("projects");
-  findDocuments("projects", function() {
+  // findDocuments("projects", function() {
   client.close();
 });
-});
+// });
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
