@@ -23,12 +23,12 @@ const client = new MongoClient(url);
 client.connect(function(err) {
   assert.equal(null, err);
   console.log("Connected successfully to server");
+  listDatabases(client);
+  // const db = client.db(dbName);
 
-  const db = client.db(dbName);
-
-  findDocuments(db, function() {
-    client.close();
-  });
+  // findDocuments(db, function() {
+  //   client.close();
+  // });
 });
 
 const port = process.env.PORT || 5000;
