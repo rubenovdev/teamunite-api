@@ -1,0 +1,23 @@
+{
+  "name": "teams-backend",
+  "version": "1.0.0",
+  "description": "### Работа с репозиторием",
+  "main": "server.js",
+  "scripts": {
+    "start": "MONGO_DB_ADDRESS=mongodb://localhost:27017 nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexander-rubenov/teams-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexander-rubenov/teams-backend/issues"
+  },
+  "homepage": "https://github.com/alexander-rubenov/teams-backend#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^3.5.5"
+  }
+}
