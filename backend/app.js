@@ -1,7 +1,5 @@
 const express = require("express");
-const fs = require("fs");
 
-const projects = JSON.parse(fs.readFileSync(`${__dirname}/projects.json`));
 const app = express();
 
 app.use((req, res, next) => {
@@ -22,7 +20,7 @@ app.get("/", (req, res) => {
     status: "success",
     results: projects.length,
     data: {
-      projects
+      // projects get it from mongoDB
     }
   });
 });
