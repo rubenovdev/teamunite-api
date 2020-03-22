@@ -18,7 +18,7 @@ exports.addProject = (req, res) => {
     .then(doc => console.log(doc))
     .catch(err => console.log(err));
 
-  res.status(200).json({
+  res.status(201).json({
     status: "success",
     data: {
       project: { ...req.body }
