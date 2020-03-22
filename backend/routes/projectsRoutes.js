@@ -4,7 +4,7 @@ const projectsController = require("../controllers/projectsController");
 const router = express.Router();
 
 router
-  .route("/api/v1/projects")
+  .route("/")
   .get(projectsController.getAllProjects)
   .post(projectsController.addProject);
 
