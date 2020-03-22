@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const projectSchema = new mongoose.Schema({
   title: { type: String, unique: true, required: "A project must have a name" },
   description: { type: String, required: "A project must have a description" },
-  users: String | [],
+  users: String,
   status: String,
   createdAt: +new Date()
 });
