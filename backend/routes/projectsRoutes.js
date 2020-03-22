@@ -4,10 +4,10 @@ const projectsController = require("../controllers/projectsController");
 const router = express.Router();
 
 router
-  .route("")
+  .route("/")
   .get(projectsController.getAllProjects)
   .post(projectsController.addProject);
 
-router.get("/active", projectsController.getProjectsByStatus);
+router.route("/active").get(projectsController.getProjectsByStatus);
 
 module.exports = router;
