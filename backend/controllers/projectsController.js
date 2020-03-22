@@ -1,10 +1,11 @@
 const Project = require("../models/projectsModel");
 
 exports.getAllProjects = (req, res) => {
+  const projects = Project.find();
   res.status(200).json({
     status: "success",
-    results: "Im length",
-    data: "Im data"
+    results: projects.length,
+    data: projects
   });
 };
 

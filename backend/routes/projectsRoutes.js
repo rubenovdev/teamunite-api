@@ -1,9 +1,10 @@
 const express = require("express");
-const projectsController = require("./controllers/projectsController");
+const projectsController = require("../controllers/projectsController");
 
 const router = express.Router();
 
-router("/api/v1/projects")
+router
+  .route("/")
   .get(projectsController.getAllProjects)
   .post(projectsController.addProject);
 
