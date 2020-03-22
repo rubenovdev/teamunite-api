@@ -8,6 +8,6 @@ router
   .get(projectsController.getAllProjects)
   .post(projectsController.addProject);
 
-router.route("/:active").get(projectsController.getProjectsByStatus);
+router.get("/active", projectsController.getProjectsByStatus);
 
 module.exports = router;
