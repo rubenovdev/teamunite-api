@@ -10,7 +10,8 @@ exports.getAllProjects = (req, res) => {
 };
 
 exports.addProject = (req, res) => {
-  const project = new Project({ ...req.body });
+  const project = Project.create(req.body);
+
   project
     .save(err => {
       console.log(err);
