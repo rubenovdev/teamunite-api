@@ -20,7 +20,7 @@ exports.addProject = async (req, res) => {
     res.status(201).json({
       status: "success",
       data: {
-        project: newProject
+        project: req.body
       }
     });
   } catch (err) {
