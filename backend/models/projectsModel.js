@@ -4,7 +4,7 @@ const projectSchema = new mongoose.Schema({
   name: String,
   description: String,
   faculty: String,
-  company: mongoose.Schema.Types.ObjectId,
+  company: { type: mongoose.Schema.Types.ObjectId, ref: "Company" },
   vacancies_ids: [mongoose.Schema.Types.ObjectId],
   curators_ids: [mongoose.Schema.Types.ObjectId],
   status: { type: String, default: "review" },
