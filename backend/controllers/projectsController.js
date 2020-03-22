@@ -2,6 +2,7 @@ const Project = require("../models/projectsModel");
 
 exports.getAllProjects = async (req, res) => {
   const projects = await Project.find();
+
   res.status(200).json({
     status: "success",
     results: projects.length,
@@ -9,14 +10,19 @@ exports.getAllProjects = async (req, res) => {
   });
 };
 
+exports.getProjectsByStatus = async (req, res) => {
+  const projectsByStatus = await Project.find({ status: "active" });
+
+  res.status(200).json({
+    status: "success",
+    results: projectsByStatus.length,
+    data: projectsByStatus
+  });
+};
+
 exports.addProject = async (req, res) => {
   try {
-    await Project.create(req.body, err => {
-      res.status(400).json({
-        status: "error",
-        message: err
-      });
-    });
+    await Project.create(req.body);
     res.status(201).json({
       status: "success",
       message: "I work",
