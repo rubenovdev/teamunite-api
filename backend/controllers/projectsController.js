@@ -19,6 +19,7 @@ exports.addProject = async (req, res) => {
     });
     res.status(201).json({
       status: "success",
+      message: "I work",
       data: {
         project: req.body
       }
