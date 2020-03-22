@@ -12,8 +12,6 @@ exports.getAllProjects = (req, res) => {
 exports.addProject = (req, res) => {
   const project = Project.create(req.body);
 
-  project.then(doc => console.log(doc)).catch(err => console.log(err));
-
   res.status(201).json({
     status: "success",
     data: {
