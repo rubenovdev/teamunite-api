@@ -1,4 +1,5 @@
 const express = require("express");
+const projectsRouter = require("./routes/projectsRoutes");
 
 const app = express();
 
@@ -15,12 +16,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/", (req, res) => {
-  res.status(200).json({
-    status: "success",
-    results: "Im length",
-    data: "Im data"
-  });
-});
+app.get("/api/v1/projects", projectsRouter);
 
 module.exports = app;
