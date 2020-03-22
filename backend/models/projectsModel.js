@@ -4,7 +4,7 @@ const projectSchema = new mongoose.Schema({
   title: String,
   description: String,
   users: String,
-  status: { type: String, default: "На рассмотрении" },
+  status: { type: String, default: "review" },
   createdAt: { type: Number, default: +new Date() }
 });
 
