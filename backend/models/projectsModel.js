@@ -1,14 +1,8 @@
 const mongoose = require("mongoose");
 
 const projectSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: [true, "A project must have a name"]
-  },
-  description: {
-    type: String,
-    required: [true, "A project must have a description"]
-  },
+  title: String,
+  description: String,
   users: String,
   status: String,
   createdAt: { type: Number, default: +new Date() }
