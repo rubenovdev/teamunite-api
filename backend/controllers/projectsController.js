@@ -9,8 +9,8 @@ exports.getAllProjects = (req, res) => {
   });
 };
 
-exports.addProject = (req, res) => {
-  const project = Project.create(req.body);
+exports.addProject = async (req, res) => {
+  await Project.create(req.body);
 
   res.status(201).json({
     status: "success",
