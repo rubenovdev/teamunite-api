@@ -1,27 +1,33 @@
 const Project = require("../models/projectsModel");
 
-exports.getAllProjects = (req, res) => {
-  // const projects = Project.find();
+exports.getAllProjects = async (req, res) => {
+  const projects = await Project.find();
   res.status(200).json({
     status: "success",
-    results: "projects.length",
-    data: "projects"
+    results: projects.length,
+    data: projects
   });
 };
 
-exports.addProject = (req, res) => {
-  const project = new Project({ ...req.body });
-  project
-    .save(err => {
-      console.log(err);
-    })
-    .then(doc => console.log(doc))
-    .catch(err => console.log(err));
-
-  res.status(201).json({
-    status: "success",
-    data: {
-      project: { ...req.body }
-    }
-  });
+exports.addProject = async (req, res) => {
+  try {
+    await Project.create(req.body, err => {
+      res.status(400).json({
+        status: "error",
+        message: err
+      });
+    });
+    res.status(201).json({
+      status: "success",
+      message: "I work",
+      data: {
+        project: req.body
+      }
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "error",
+      message: err
+    });
+  }
 };
