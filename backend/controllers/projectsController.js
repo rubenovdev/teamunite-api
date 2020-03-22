@@ -10,12 +10,18 @@ exports.getAllProjects = (req, res) => {
 };
 
 exports.addProject = async (req, res) => {
-  await Project.create(req.body);
-
-  res.status(201).json({
-    status: "success",
-    data: {
-      project: { ...req.body }
-    }
-  });
+  try {
+    const newProject = await Project.create(req.body);
+    res.status(201).json({
+      status: "success",
+      data: {
+        project: newProject
+      }
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "error",
+      message: err
+    });
+  }
 };
