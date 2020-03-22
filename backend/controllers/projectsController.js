@@ -1,11 +1,11 @@
 const Project = require("../models/projectsModel");
 
-exports.getAllProjects = (req, res) => {
-  // const projects = Project.find();
+exports.getAllProjects = async (req, res) => {
+  const projects = await Project.find();
   res.status(200).json({
     status: "success",
-    results: "projects.length",
-    data: "projects"
+    results: projects.length,
+    data: projects
   });
 };
 

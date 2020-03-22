@@ -15,7 +15,10 @@ mongoose
     useCreateIndex: true,
     useFindAndModify: false
   })
-  .then(() => console.log("Connected successfully to server"));
+  .then(con => {
+    con.listCollections();
+    console.log("Connected successfully to server");
+  });
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
