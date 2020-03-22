@@ -11,7 +11,12 @@ exports.getAllProjects = (req, res) => {
 
 exports.addProject = async (req, res) => {
   try {
-    const newProject = await Project.create(req.body);
+    const newProject = await Project.create(req.body, err => {
+      res.status(400).json({
+        status: "error",
+        message: err
+      });
+    });
     res.status(201).json({
       status: "success",
       data: {
