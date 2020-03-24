@@ -11,7 +11,7 @@ const projectSchema = new mongoose.Schema({
   vacancies: [{ type: mongoose.Schema.Types.ObjectId, ref: Vacancy }],
   curators: [{ type: mongoose.Schema.Types.ObjectId, ref: Curator }],
   status: { type: String, default: "review" },
-  createdAt: { type: Number, default: +new Date() }
+  createdAt: { type: Number, default: new Date() }
 });
 
 const Project = mongoose.model("Project", projectSchema, "projects");
