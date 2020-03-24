@@ -1,4 +1,3 @@
-const Project = require("../models/projectsModel");
 const mongoose = require("mongoose");
 
 const companySchema = new mongoose.Schema({
@@ -7,7 +6,7 @@ const companySchema = new mongoose.Schema({
   sphereOfActivity: String,
   logo: String,
   isAvailableInternship: Boolean,
-  projects: [{ type: mongoose.Schema.Types.ObjectId, ref: Project }]
+  projects: [{ type: mongoose.Schema.Types.ObjectId, ref: "Company" }]
 });
 
 const Company = mongoose.model("Company", companySchema, "companies");
