@@ -2,7 +2,10 @@ const Project = require("../models/projectsModel");
 
 exports.getAllProjects = async (req, res) => {
   const projects = await Project.find()
-    .populate("company")
+    .populate({
+      path: "company",
+      populate: { path: "projects" }
+    })
     .populate("curators")
     .populate("vacancies");
 
