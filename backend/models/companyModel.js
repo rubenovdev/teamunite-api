@@ -6,7 +6,7 @@ const companySchema = new mongoose.Schema({
   sphereOfActivity: String,
   logo: String,
   isAvailableInternship: Boolean,
-  project_ids: [{ type: mongoose.Schema.Types.ObjectId, ref: "Company" }]
+  projects: [{ type: mongoose.Schema.Types.ObjectId, ref: "Company" }]
 });
 
 const Company = mongoose.model("Company", companySchema, "companies");
