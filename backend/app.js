@@ -1,5 +1,6 @@
 const express = require("express");
 const projectsRouter = require("./routes/projectsRoutes");
+const companiesRouter = require("./routes/companiesRoutes");
 
 const app = express();
 
@@ -17,5 +18,6 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/v1/projects", projectsRouter);
+app.use("/api/v1/companies", companiesRouter);
 
 module.exports = app;
