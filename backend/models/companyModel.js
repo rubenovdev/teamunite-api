@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Project = require("../models/projectsModel");
 
 const companySchema = new mongoose.Schema({
   name: String,
@@ -6,7 +7,7 @@ const companySchema = new mongoose.Schema({
   description: String,
   logo: String,
   isAvailableInternship: Boolean,
-  projects: [mongoose.Schema.Types.ObjectId]
+  projects: [{type: mongoose.Schema.Types.ObjectId, ref: Project}]
 });
 
 const Company = mongoose.model("Company", companySchema, "companies");
