@@ -8,7 +8,4 @@ router
   .get(companiesController.getAllCompanies)
   .post(companiesController.addCompany);
 
-
-
-
 module.exports = router;

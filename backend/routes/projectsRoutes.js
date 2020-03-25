@@ -10,5 +10,4 @@ router
 
 router.route("/active").get(projectsController.getProjectsByStatus);
 
-
 module.exports = router;

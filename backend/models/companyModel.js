@@ -7,7 +7,7 @@ const companySchema = new mongoose.Schema({
   description: String,
   logo: String,
   isAvailableInternship: Boolean,
-  projects: [{type: mongoose.Schema.Types.ObjectId, ref: Project}]
+  projects: [{ type: mongoose.Schema.Types.ObjectId, ref: Project }]
 });
 
 const Company = mongoose.model("Company", companySchema, "companies");
