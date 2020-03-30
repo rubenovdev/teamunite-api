@@ -14,7 +14,10 @@ exports.getAllProjects = async (req, res) => {
 };
 
 exports.getProjectsByStatus = async (req, res) => {
-  const projectsByStatus = await Project.find({ status: "active" });
+  const projectsByStatus = await Project.find({ status: "active" })
+    .populate("company")
+    .populate("curators")
+    .populate("vacancies");
 
   res.status(200).json({
     status: "success",
