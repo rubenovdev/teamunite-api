@@ -1,7 +1,10 @@
 const Project = require("../models/projectsModel");
 
 exports.getAllProjects = async (req, res) => {
-  const projects = await Project.find();
+  const projects = await Project.find()
+    .populate("company")
+    .populate("curators")
+    .populate("vacancies");
 
   res.status(200).json({
     status: "success",
