@@ -1,8 +1,11 @@
 const express = require("express");
 const projectsRouter = require("./routes/projectsRoutes");
 const companiesRouter = require("./routes/companiesRoutes");
+const questionsRouter = require("./routes/questionsRoutes");
 
 const app = express();
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -19,5 +22,6 @@ app.use((req, res, next) => {
 
 app.use("/api/v1/projects", projectsRouter);
 app.use("/api/v1/companies", companiesRouter);
+app.use("/api/v1/questions", questionsRouter);
 
 module.exports = app;
