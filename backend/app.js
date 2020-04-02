@@ -2,6 +2,7 @@ const express = require("express");
 const projectsRouter = require("./routes/projectsRoutes");
 const companiesRouter = require("./routes/companiesRoutes");
 const questionsRouter = require("./routes/questionsRoutes");
+const adsRouter = require("./routes/adsRoutes");
 
 const app = express();
 const bodyParser = require("body-parser");
@@ -20,8 +21,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api/v1/projects", projectsRouter);
-app.use("/api/v1/companies", companiesRouter);
-app.use("/api/v1/questions", questionsRouter);
+app.use("/api/v1/projects", projectsRouter); //get all projects
+app.use("/api/v1/companies", companiesRouter); //get all companies
+app.use("/api/v1/questions", questionsRouter); //get answers to the information collection form
+app.use("/api/v1/ads", adsRouter); //get all ads or one ads by id
 
 module.exports = app;
