@@ -1,7 +1,11 @@
 const Company = require("../models/companyModel");
 
 exports.getAllCompanies = async (req, res) => {
-  const companies = await Company.find(); //.populate("projects")
+  const id = req.query.id;
+  const companies = id
+    ? await Company.find({ _id: id }).populate("projects")
+    : await Company.find().populate("projects"); //.populate("projects")
+
   res.status(200).json({
     status: "success",
     results: companies.length,
