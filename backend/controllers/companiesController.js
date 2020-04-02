@@ -4,7 +4,7 @@ exports.getAllCompanies = async (req, res) => {
   const id = req.query.id;
   const companies = id
     ? await Company.find({ _id: id }).populate("projects")
-    : await Company.find().populate("projects"); //.populate("projects")
+    : await Company.find().populate("projects");
 
   res.status(200).json({
     status: "success",
