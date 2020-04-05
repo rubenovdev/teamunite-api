@@ -6,7 +6,7 @@ exports.getAllCompanies = async (req, res) => {
   res.status(200).json({
     status: "success",
     results: companies.length,
-    data: companies
+    data: companies,
   });
 };
 
@@ -15,15 +15,14 @@ exports.addCompany = async (req, res) => {
     await Company.create(req.body);
     res.status(201).json({
       status: "success",
-      message: "I work",
       data: {
-        project: req.body
-      }
+        project: req.body,
+      },
     });
   } catch (err) {
     res.status(400).json({
       status: "error",
-      message: err
+      message: err,
     });
   }
 };
