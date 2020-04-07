@@ -1,11 +1,6 @@
 const Ads = require("../models/adsModel");
 
 exports.getAllAds = async (req, res) => {
-  // let ads = 0;
-  // if (req.params.id) {
-  //   const id = req.params.id;
-  //   ads = Ads.find({ _id: id });
-  // } else {
   const ads = await Ads.find();
 
   res.status(200).json({
