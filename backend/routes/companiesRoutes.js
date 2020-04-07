@@ -8,4 +8,6 @@ router
   .get(companiesController.getAllCompanies)
   .post(companiesController.addCompany);
 
+router.route("/:id").get(companiesController.getCompanyById);
+
 module.exports = router;
