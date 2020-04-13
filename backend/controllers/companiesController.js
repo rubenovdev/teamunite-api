@@ -32,7 +32,6 @@ exports.addCompany = async (req, res) => {
     await Company.create(req.body);
     res.status(201).json({
       status: "success",
-      message: "I work",
       data: {
         project: req.body,
       },

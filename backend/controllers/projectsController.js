@@ -9,7 +9,7 @@ exports.getAllProjects = async (req, res) => {
   res.status(200).json({
     status: "success",
     results: projects.length,
-    data: projects
+    data: projects,
   });
 };
 
@@ -22,7 +22,7 @@ exports.getProjectsByStatus = async (req, res) => {
   res.status(200).json({
     status: "success",
     results: projectsByStatus.length,
-    data: projectsByStatus
+    data: projectsByStatus,
   });
 };
 
@@ -31,15 +31,14 @@ exports.addProject = async (req, res) => {
     await Project.create(req.body);
     res.status(201).json({
       status: "success",
-      message: "I work",
       data: {
-        project: req.body
-      }
+        project: req.body,
+      },
     });
   } catch (err) {
     res.status(400).json({
       status: "error",
-      message: err
+      message: err,
     });
   }
 };
