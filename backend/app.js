@@ -24,6 +24,6 @@ app.use((req, res, next) => {
 app.use("/api/v1/projects", projectsRouter); //get all projects
 app.use("/api/v1/companies", companiesRouter); //get all companies
 app.use("/api/v1/questions", questionsRouter); //get answers to the information collection form
-app.use("/api/v1/ads", adsRouter); //get all ads or one ads by id
+app.use("/api/v1/announcements", adsRouter); //get all ads or one ads by id
 
 module.exports = app;
