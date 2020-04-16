@@ -5,9 +5,7 @@ exports.getAllUsers = async (req, res) => {
 
   res.status(200).json({
     status: "success",
-    data: {
-      users,
-    },
+    data: users,
   });
 };
 
@@ -16,8 +14,6 @@ exports.getUserById = async (req, res) => {
 
   res.status(200).json({
     status: "success",
-    data: {
-      user,
-    },
+    data: user,
   });
 };
