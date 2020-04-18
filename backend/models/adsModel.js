@@ -6,7 +6,7 @@ const adsSchema = new mongoose.Schema({
   description: String,
   author: String,
   date: Date,
-  isFavorite: Boolean
+  isFavourite: Boolean,
 });
 
 const Ads = mongoose.model("Ads", adsSchema, "ads");
