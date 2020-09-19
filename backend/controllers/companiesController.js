@@ -1,15 +1,11 @@
 const Company = require("../models/companyModel");
 
 exports.getAllCompanies = async (req, res) => {
-  const id = req.query.id;
-  const companies = id
-    ? await Company.find({ _id: id }).populate("projects")
-    : await Company.find().populate("projects");
-
+  const companies = await Company.find();
   res.status(200).json({
     status: "success",
     results: companies.length,
-    data: companies
+    data: companies,
   });
 };
 
@@ -21,12 +17,12 @@ exports.getCompanyById = async (req, res) => {
     res.status(200).json({
       status: "success",
       results: companies.length,
-      data: companies
+      data: companies,
     });
   } catch {
     res.status(200).json({
       status: "success",
-      data: "not found"
+      data: "not found",
     });
   }
 };
@@ -36,15 +32,14 @@ exports.addCompany = async (req, res) => {
     await Company.create(req.body);
     res.status(201).json({
       status: "success",
-      message: "I work",
       data: {
-        project: req.body
-      }
+        project: req.body,
+      },
     });
   } catch (err) {
     res.status(400).json({
       status: "error",
-      message: err
+      message: err,
     });
   }
 };

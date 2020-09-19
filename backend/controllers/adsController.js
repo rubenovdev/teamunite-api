@@ -6,7 +6,7 @@ exports.getAllAds = async (req, res) => {
   res.status(200).json({
     status: "success",
     results: ads.length,
-    data: ads
+    data: ads,
   });
 };
 exports.getAdsById = async (req, res) => {
@@ -17,12 +17,12 @@ exports.getAdsById = async (req, res) => {
     res.status(200).json({
       status: "success",
       results: ads.length,
-      data: ads
+      data: ads,
     });
   } catch {
     res.status(200).json({
       status: "success",
-      data: "not found"
+      data: "not found",
     });
   }
 };

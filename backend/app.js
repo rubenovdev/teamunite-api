@@ -3,6 +3,7 @@ const projectsRouter = require("./routes/projectsRoutes");
 const companiesRouter = require("./routes/companiesRoutes");
 const questionsRouter = require("./routes/questionsRoutes");
 const adsRouter = require("./routes/adsRoutes");
+const usersRouter = require("./routes/usersRoutes");
 
 const app = express();
 const bodyParser = require("body-parser");
@@ -24,6 +25,7 @@ app.use((req, res, next) => {
 app.use("/api/v1/projects", projectsRouter);
 app.use("/api/v1/companies", companiesRouter);
 app.use("/api/v1/questions", questionsRouter);
-app.use("/api/v1/ads", adsRouter);
+app.use("/api/v1/announcements", adsRouter);
+app.use("/api/v1/users", usersRouter);
 
 module.exports = app;

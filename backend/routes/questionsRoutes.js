@@ -6,8 +6,6 @@ const bodyParser = require("body-parser");
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
-router
-  .route("/")
-  .post(questionsController.addQuestion);
+router.route("/").post(questionsController.addQuestion);
 
 module.exports = router;
