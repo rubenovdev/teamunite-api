@@ -2,6 +2,8 @@ const { Router } = require('express')
 
 const router = Router()
 
+const Project = require('../models/Project')
+
 router.get('/', async (req, res) => {
 	try {
 		const projects = await Project.find()

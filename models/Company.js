@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose')
+const { Schema, model, Types } = require('mongoose')
 
 const schema = new Schema({
 	name: String,
@@ -6,7 +6,7 @@ const schema = new Schema({
 	description: String,
 	logo: String,
 	isAvailableInternship: Boolean,
-	projects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Project' }],
+	projects: [{ type: Types.ObjectId, ref: 'Project' }],
 })
 
 module.exports = model('Company', schema)

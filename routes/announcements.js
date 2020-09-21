@@ -2,9 +2,11 @@ const { Router } = require('express')
 
 const router = Router()
 
+const Announcement = require('../models/Announcement')
+
 router.get('/', async (req, res) => {
 	try {
-		const ads = await Ads.find()
+		const ads = await Announcement.find()
 
 		res.status(200).json({
 			status: 'success',
@@ -19,7 +21,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
 	try {
 		const id = req.params.id
-		const ads = await Ads.find({ _id: id })
+		const ads = await Announcement.find({ _id: id })
 
 		res.status(200).json({
 			status: 'success',

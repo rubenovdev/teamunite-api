@@ -2,6 +2,8 @@ const { Router } = require('express')
 
 const router = Router()
 
+const Company = require('../models/Company')
+
 router.get('/', async (req, res) => {
 	try {
 		const companies = await Company.find()
