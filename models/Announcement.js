@@ -1,7 +1,6 @@
-const mongoose = require('mongoose')
+const { Schema, model } = require('mongoose')
 
-const adsSchema = new mongoose.Schema({
-	id: String,
+const schema = new Schema({
 	title: String,
 	description: String,
 	author: String,
@@ -9,6 +8,4 @@ const adsSchema = new mongoose.Schema({
 	isFavourite: Boolean,
 })
 
-const Ads = mongoose.model('Announcements', adsSchema)
-
-module.exports = Ads
+module.exports = model('Announcement', schema)

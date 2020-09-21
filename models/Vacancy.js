@@ -1,11 +1,9 @@
-const mongoose = require('mongoose')
+const { Schema, model } = require('mongoose')
 
-const vacancySchema = new mongoose.Schema({
+const schema = new Schema({
 	name: String,
 	description: String,
 	quantity: Number,
 })
 
-const Vacancy = mongoose.model('Vacancy', vacancySchema, 'vacancies')
-
-module.exports = Vacancy
+module.exports = model('Vacancy', schema)
