@@ -1,31 +1,25 @@
 {
-  "name": "teams-backend",
-  "version": "1.0.0",
-  "description": "### Работа с репозиторием",
-  "main": "server.js",
-  "scripts": {
-    "start:local": "MONGO_DB_ADDRESS=mongodb://localhost:27017 nodemon server.js",
-    "start": "node ./backend/server.js",
-    "dev": "nodemon ./backend/server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/alexander-rubenov/teams-backend.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/alexander-rubenov/teams-backend/issues"
-  },
-  "homepage": "https://github.com/alexander-rubenov/teams-backend#readme",
-  "dependencies": {
-    "body-parser": "^1.19.0",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "mongodb": "^3.5.5",
-    "mongoose": "^5.9.5"
-  },
-  "engines": {
-    "node": ">=13.7.0"
-  }
+	"name": "teamunite-api",
+	"version": "1.0.0",
+	"description": "API для teamunite",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js",
+		"dev": "nodemon index.js"
+	},
+	"author": "teamunite",
+	"license": "ISC",
+	"dependencies": {
+		"compression": "^1.7.4",
+		"cors": "^2.8.5",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"express-validator": "^6.6.1",
+		"helmet": "^4.1.1",
+		"mongoose": "^5.9.5",
+		"morgan": "^1.10.0"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.4"
+	}
 }
