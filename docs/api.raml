@@ -1,0 +1,176 @@
+#%RAML 1.0
+title: Teamunite
+version: v1
+baseUri: https://api.teamunite.ru/{version}
+mediaType: application/json
+protocols: HTTPS
+
+/announcements:
+  description: Запросы для работы с объявлениями
+  get:
+    description: Получение всех объявлений
+    responses:
+      200:
+        body:
+          properties:
+            _id: String
+            title: String
+            description: String
+            author: String
+            date: Date
+            isFavourite: Boolean
+  /{id}:
+    description: Запросы для работы с определенным объявлением
+    uriParameters:
+      id:
+        description: Id объявления
+        type: String
+    get:
+      description: Получение конкретного объявления
+      responses:
+        200:
+          body:
+            properties:
+                _id: String
+                title: String
+                description: String
+                isFavorite: Boolean
+                author: String
+                date: Date
+        404:
+          body:
+            properties:
+              message: String
+/companies:
+  description: Запросы для работы с компаниями
+  get:
+    description: Получение всех компаний
+    responses:
+      200:
+        body:
+          properties:
+            name: String
+            sphereOfActivity: String
+            description: String
+            logo: String
+            isAvailableInternship: Boolean
+            projects: Array
+  post:
+    description: Добавление компании
+    body:
+      properties:
+        name: String
+        sphereOfActivity: String
+        description: String
+        logo: String
+        isAvailableInternship: Boolean
+        projects: Array
+    responses:
+      201:
+        body:
+          properties:
+            name: String
+            sphereOfActivity: String
+            description: String
+            logo: String
+            isAvailableInternship: Boolean
+            projects: Array
+  /{id}:
+    uriParameters:
+      id:
+        description: Id компании
+        type: String
+    description: Запросы для работы с конкретной компанией
+    get:
+      description: Получение конкретной компании
+      responses:
+        200:
+          body:
+            properties:
+              name: String
+              sphereOfActivity: String
+              description: String
+              logo: String
+              isAvailableInternship: Boolean
+              projects: Array
+        404:
+          body:
+            properties:
+              message: String
+  
+/projects:
+  description: Запросы для работы с проектами
+  get:
+    description: Получение всех проектов
+    responses:
+      200:
+        body:
+          properties:
+            name: String
+            description: String
+            faculty: String
+            company: Object
+            vacancies: Object
+            curators: Object
+            status: String
+            createdAt: Date
+  post:
+    description: Добавление проекта
+    body:
+      properties:
+        name: String
+        description: String
+        faculty: String
+        company: Object
+        vacancies: Object
+        curators: Object
+        status: String
+        createdAt: Date
+    responses:
+      201:
+        body:
+          properties:
+            name: String
+            description: String
+            faculty: String
+            company: Object
+            vacancies: Object
+            curators: Object
+            status: String
+            createdAt: Date
+  /active:
+    get:
+      description: Получение всех проектов с активным статусом
+      responses:
+        200:
+          body:
+            properties:
+              name: String
+              description: String
+              faculty: String
+              company: Object
+              vacancies: Object
+              curators: Object
+              status: String
+              createdAt: Date
+/users:
+  description: Запросы для работы с пользователями
+  get:
+    description: Получение всех пользователей
+    responses:
+      200:
+        body:
+          properties:
+            name: String
+            surname: String
+            status: String
+  /{id}:
+    get:
+      description: Получение конкретного пользователей
+      responses:
+        200:
+          body:
+            properties:
+              name: String
+              surname: String
+              status: String
