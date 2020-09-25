@@ -1,9 +1,13 @@
+// Dependencies
 const { Router } = require('express')
 
+// Variables
 const router = Router()
 
+// Models
 const Project = require('../models/Project')
 
+// GET /v1/projects
 router.get('/', async (req, res) => {
 	try {
 		const projects = await Project.find()
@@ -11,42 +15,42 @@ router.get('/', async (req, res) => {
 			.populate('curators')
 			.populate('vacancies')
 
-		res.status(200).json({
-			status: 'success',
-			results: projects.length,
-			data: projects,
-		})
+		return res.status(200).json(projects)
 	} catch (e) {
 		console.log(e)
+		return res
+			.status(500)
+			.json({ message: 'Что-то пошло не так, попробуйте позже' })
 	}
 })
+
+// GET /v1/projects/active
 router.get('/active', async (req, res) => {
 	try {
-		const projectsByStatus = await Project.find({ status: 'active' })
+		const projects = await Project.find({ status: 'active' })
 			.populate('company')
 			.populate('curators')
 			.populate('vacancies')
 
-		res.status(200).json({
-			status: 'success',
-			results: projectsByStatus.length,
-			data: projectsByStatus,
-		})
+		return res.status(200).json(projects)
 	} catch (e) {
 		console.log(e)
+		return res
+			.status(500)
+			.json({ message: 'Что-то пошло не так, попробуйте позже' })
 	}
 })
+
+// POST /v1/projects
 router.post('/', async (req, res) => {
 	try {
-		await Project.create(req.body)
-		res.status(201).json({
-			status: 'success',
-			data: {
-				project: req.body,
-			},
-		})
+		const project = await Project.create(req.body)
+		return res.status(201).json(project)
 	} catch (e) {
 		console.log(e)
+		return res
+			.status(500)
+			.json({ message: 'Что-то пошло не так, попробуйте позже' })
 	}
 })
 

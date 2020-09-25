@@ -22,10 +22,10 @@ app.use(helmet())
 app.use(cors())
 
 // Routes
-app.use('/api/v1/announcements', require('./routes/announcements'))
-app.use('/api/v1/companies', require('./routes/companies'))
-app.use('/api/v1/projects', require('./routes/projects'))
-app.use('/api/v1/users', require('./routes/users'))
+app.use('/v1/announcements', require('./routes/announcements'))
+app.use('/v1/companies', require('./routes/companies'))
+app.use('/v1/projects', require('./routes/projects'))
+app.use('/v1/users', require('./routes/users'))
 
 const start = async () => {
 	try {
