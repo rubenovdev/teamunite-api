@@ -1,4 +1,5 @@
 // Dependencies
+const { validationResult } = require('express-validator')
 const { Router } = require('express')
 
 // Variables
@@ -6,6 +7,9 @@ const router = Router()
 
 // Models
 const Project = require('../models/Project')
+
+// Validators
+const { projectValidators } = require('../utils/validators')
 
 // GET /v1/projects
 router.get('/', async (req, res) => {
@@ -24,10 +28,11 @@ router.get('/', async (req, res) => {
 	}
 })
 
-// GET /v1/projects/active
-router.get('/active', async (req, res) => {
+// GET /v1/projects/:status
+router.get('/:status', async (req, res) => {
 	try {
-		const projects = await Project.find({ status: 'active' })
+		const status = req.params.status
+		const projects = await Project.find({ status })
 			.populate('company')
 			.populate('curators')
 			.populate('vacancies')
@@ -42,9 +47,31 @@ router.get('/active', async (req, res) => {
 })
 
 // POST /v1/projects
-router.post('/', async (req, res) => {
+router.post('/', projectValidators, async (req, res) => {
 	try {
-		const project = await Project.create(req.body)
+		const errors = validationResult(req)
+		if (!errors.isEmpty()) {
+			return res.status(400).json({ message: errors.array()[0].msg })
+		}
+
+		const {
+			name,
+			description,
+			faculty,
+			company,
+			vacancies,
+			curators,
+		} = req.body
+
+		const project = new Project({
+			name,
+			description,
+			faculty,
+			company,
+			vacancies,
+			curators,
+    })
+    await project.save()
 		return res.status(201).json(project)
 	} catch (e) {
 		console.log(e)

@@ -12,6 +12,7 @@ const schema = new Schema(
 		},
 		author: {
 			type: Types.ObjectId,
+			ref: 'User',
 			required: true,
 		},
 		date: {

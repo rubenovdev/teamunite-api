@@ -24,7 +24,11 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
 	try {
 		const user = await User.findById(req.params.id)
-		res.status(200).json(user)
+		if (user) {
+			return res.status(200).json(user)
+		} else {
+			return res.status(400).json({ message: 'Пользователь не найден' })
+		}
 	} catch (e) {
 		console.log(e)
 		return res
