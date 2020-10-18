@@ -14,7 +14,7 @@ const { announcementsValidators } = require('../utils/validators')
 // GET /v1/announcements
 router.get('/', async (req, res) => {
 	try {
-		const announcements = await Announcement.find()
+		const announcements = await Announcement.find().populate('author')
 		return res.status(200).json(announcements)
 	} catch (e) {
 		console.log(e)
@@ -27,7 +27,9 @@ router.get('/', async (req, res) => {
 // GET /v1/announcements/:id
 router.get('/:id', async (req, res) => {
 	try {
-		const announcement = await Announcement.findById(req.params.id)
+		const announcement = await Announcement.findById(req.params.id).populate(
+			'author',
+		)
 		if (announcement) {
 			return res.status(200).json(announcement)
 		} else {
@@ -55,7 +57,7 @@ router.post('/', announcementsValidators, async (req, res) => {
 			author,
 		})
 		await announcement.save()
-		return res.status(200).json(announcement)
+		return res.status(201).json(announcement)
 	} catch (e) {
 		console.log(e)
 		return res

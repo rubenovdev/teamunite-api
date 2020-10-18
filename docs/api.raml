@@ -13,34 +13,140 @@ protocols: HTTPS
       200:
         body:
           properties:
-            _id: String
-            title: String
-            description: String
-            author: String
-            date: Date
-            isFavourite: Boolean
+            _id:
+              type: ObjectId
+              description: ID объявления
+            title:
+              type: String
+              description: Заголовок объявления
+            description:
+              type: String
+              description: Описание объявления
+            author:
+              type: Object
+              description: Автор объявления
+            createdAt:
+              type: Date
+              description: Дата создания объявления
+          example:
+            {
+              "_id": "5f8c6757217cb338ebeb2b79",
+              "title": "Поступают вопрос от иностранцев, можно ли уезжать домой. Особенно если есть пересдача.",
+              "description": "Поступают вопрос от иностранцев, можно ли уезжать домой. Особенно если есть пересдача. Ответ такой: если вы хотите, вы можете уехать. Пересдачи для вас назначат после официального открытия границ.",
+              "author": {
+                  "_id": "5f8c63b9041a2dd79435c6eb",
+                  "name": "Марина",
+                  "surname": "Даньшина",
+                  "status": "curator"
+              },
+              "createdAt": "2020-10-18T16:03:35.708Z"
+            }
+  post:
+    description: Добавление объявления
+    body: 
+      properties:
+        title:
+          type: String
+          description: Заголовок объявления
+        description:
+          type: String
+          description: Описание объявления
+        author:
+          type: ObjectId
+          description: Автор объявления
+      example:
+        {
+          "title": "Поступают вопрос от иностранцев, можно ли уезжать домой. Особенно если есть пересдача.",
+          "description": "Поступают вопрос от иностранцев, можно ли уезжать домой. Особенно если есть пересдача. Ответ такой: если вы хотите, вы можете уехать. Пересдачи для вас назначат после официального открытия границ.",
+          "author": "5f8c63b9041a2dd79435c6eb"
+        }
+    responses:
+      201:
+        body:
+          properties:
+            _id:
+              type: ObjectId
+              description: ID объявления
+            title:
+              type: String
+              description: Заголовок объявления
+            description:
+              type: String
+              description: Описание объявления
+            author:
+              type: ObjectId
+              description: Автор объявления
+            createdAt:
+              type: Date
+              description: Дата создания объявления
+          example:
+            {
+              "_id": "5f8c6757217cb338ebeb2b79",
+              "title": "Поступают вопрос от иностранцев, можно ли уезжать домой. Особенно если есть пересдача.",
+              "description": "Поступают вопрос от иностранцев, можно ли уезжать домой. Особенно если есть пересдача. Ответ такой: если вы хотите, вы можете уехать. Пересдачи для вас назначат после официального открытия границ.",
+              "author": "5f8c63b9041a2dd79435c6eb",
+              "createdAt": "2020-10-18T16:03:35.708Z"
+            }
+      400:
+        body:
+          properties:
+            message:
+              type: String
+              description: Ошибка при добавлении
+          example:
+            {
+              "message": "Укажите заголовок объявления"
+            }
   /{id}:
-    description: Запросы для работы с определенным объявлением
+    description: Запросы для работы с объявлением
     uriParameters:
       id:
-        description: Id объявления
-        type: String
+        description: ID объявления
+        type: ObjectId
     get:
-      description: Получение конкретного объявления
+      description: Получение объявления
       responses:
         200:
           body:
             properties:
-                _id: String
-                title: String
-                description: String
-                isFavorite: Boolean
-                author: String
-                date: Date
+              _id:
+                type: ObjectId
+                description: ID объявления
+              title:
+                type: String
+                description: Заголовок объявления
+              description:
+                type: String
+                description: Описание объявления
+              author:
+                type: Object
+                description: Автор объявления
+              createdAt:
+                type: Date
+                description: Дата создания объявления
+            example:
+              {
+                "_id": "5f8c6757217cb338ebeb2b79",
+                "title": "Поступают вопрос от иностранцев, можно ли уезжать домой. Особенно если есть пересдача.",
+                "description": "Поступают вопрос от иностранцев, можно ли уезжать домой. Особенно если есть пересдача. Ответ такой: если вы хотите, вы можете уехать. Пересдачи для вас назначат после официального открытия границ.",
+                "author": {
+                    "_id": "5f8c63b9041a2dd79435c6eb",
+                    "name": "Марина",
+                    "surname": "Даньшина",
+                    "status": "curator"
+                },
+                "createdAt": "2020-10-18T16:03:35.708Z"
+              }
         404:
           body:
             properties:
-              message: String
+              message:
+                type: String
+                description: Сообщение об ошибке
+            example: 
+              {
+                "message": "Объявление не найдено"
+              }
 /companies:
   description: Запросы для работы с компаниями
   get:
@@ -49,54 +155,216 @@ protocols: HTTPS
       200:
         body:
           properties:
-            name: String
-            sphereOfActivity: String
-            description: String
-            logo: String
-            isAvailableInternship: Boolean
-            projects: Array
+            _id:
+              type: ObjectId
+              description: ID компании
+            name:
+              type: String
+              description: Название компании (уникальное)
+            description:
+              type: String
+              description: Описание компании
+            activity:
+              type: String
+              description: Сфера деятельности компании
+            logo:
+              type: String
+              description: Ссылка на логотип компании
+            internship:
+              type: Boolean
+              description: Наличие стажировок в компании
+            projects:
+              type: Array
+              description: Проекты компании
+              required: false
+          example:
+            [
+              {
+                "_id": "5f8c700f4260fb3e68365c8d",
+                "name": "Тинькофф",
+                "description": "Тинькофф — технологическая компания с банковской лицензией. Примерно 70% сотрудников штаб-квартиры — IT-специалисты, которые каждый день создают лучшие цифровые продукты в России",
+                "activity": "Онлайн-экосистема, основанная на финансовых и лайфстайл-услугах",
+                "logo": "/logos/Тинькофф-eRLhfQXPb.jpg",
+                "internship": true,
+                "projects": [
+                  {
+                    "status": "review",
+                    "_id": "5f8c709fd18f723e90120944",
+                    "name": "Электронный лабораторный журнал",
+                    "description": "Необходимо разработать систему организации исследовательской деятельности, в основе которой лежит командная работа над научным проектом. Система должна обеспечивать возможность создание  протоколов исследований, календарных планов, отслеживание вклада участников проекта, возможность сохранения данных на локальном сервере их однозначной маркировкой, отслеживание расходных материалов лаборатории.",
+                    "faculty": "Факультет информационных технологий",
+                    "vacancies": [
+                      {
+                          "_id": "5f8c709fd18f723e90120945",
+                          "name": "NodeJS-разработчик",
+                          "description": "Backend на nodejs",
+                          "quantity": 1
+                      },
+                      {
+                          "_id": "5f8c709fd18f723e90120946",
+                          "name": "React-разработчик",
+                          "description": "Fontend на react",
+                          "quantity": 2
+                      }
+                    ],
+                    "curators": [
+                      "5f8c63b9041a2dd79435c6eb"
+                    ],
+                    "createdAt": "2020-10-18T16:43:11.544Z"
+                  }
+                ]
+              }
+            ]
   post:
     description: Добавление компании
     body:
-      properties:
-        name: String
-        sphereOfActivity: String
-        description: String
-        logo: String
-        isAvailableInternship: Boolean
-        projects: Array
+      multipart/form-data:
+        properties:
+          name:
+            type: String
+            description: Название компании (уникальное)
+          description:
+            type: String
+            description: Описание компании
+          activity:
+            type: String
+            description: Сфера деятельности компании
+          logo:
+            type: File
+            description: Логотип компании
+          internship:
+            type: Boolean
+            description: Наличие стажировок в компании
+        example:
+          {
+            "name": "Тинькофф",
+            "description": "Тинькофф — технологическая компания с банковской лицензией. Примерно 70% сотрудников штаб-квартиры — IT-специалисты, которые каждый день создают лучшие цифровые продукты в России",
+            "activity": "Онлайн-экосистема, основанная на финансовых и лайфстайл-услугах",
+            "logo": "FILE",
+            "internship": true,
+          }
     responses:
       201:
         body:
           properties:
-            name: String
-            sphereOfActivity: String
-            description: String
-            logo: String
-            isAvailableInternship: Boolean
-            projects: Array
+            _id:
+              type: ObjectId
+              description: ID компании
+            name:
+              type: String
+              description: Название компании (уникальное)
+            description:
+              type: String
+              description: Описание компании
+            activity:
+              type: String
+              description: Сфера деятельности компании
+            logo:
+              type: String
+              description: Ссылка на логотип компании
+            internship:
+              type: Boolean
+              description: Наличие стажировок в компании
+          example:
+            {
+              "_id": "5f8c427ea3bc091fcf3610a4",
+              "name": "Тинькофф",
+              "description": "Тинькофф — технологическая компания с банковской лицензией. Примерно 70% сотрудников штаб-квартиры — IT-специалисты, которые каждый день создают лучшие цифровые продукты в России",
+              "activity": "Онлайн-экосистема, основанная на финансовых и лайфстайл-услугах",
+              "logo": "/logos/Тинькофф-7RZkXpTSP.png",
+              "internship": true
+            }
+      400:
+        body:
+          properties:
+            message:
+              type: String
+              description: Ошибка при добавлении
+          example:
+            {
+              "message": "Укажите название компании"
+            }
   /{id}:
     uriParameters:
       id:
-        description: Id компании
-        type: String
-    description: Запросы для работы с конкретной компанией
+        type: ObjectId
+        description: ID компании
+    description: Запросы для работы с компанией
     get:
-      description: Получение конкретной компании
+      description: Получение компании
       responses:
         200:
           body:
             properties:
-              name: String
-              sphereOfActivity: String
-              description: String
-              logo: String
-              isAvailableInternship: Boolean
-              projects: Array
+              _id:
+                type: ObjectId
+                description: ID компании
+              name:
+                type: String
+                description: Название компании (уникальное)
+              description:
+                type: String
+                description: Описание компании
+              activity:
+                type: String
+                description: Сфера деятельности компании
+              logo:
+                type: String
+                description: Ссылка на логотип компании
+              internship:
+                type: Boolean
+                description: Наличие стажировок в компании
+              projects:
+                type: Array
+                description: Проекты компании
+                required: false
+            example:
+              {
+                "_id": "5f8c700f4260fb3e68365c8d",
+                "name": "Тинькофф",
+                "description": "Тинькофф — технологическая компания с банковской лицензией. Примерно 70% сотрудников штаб-квартиры — IT-специалисты, которые каждый день создают лучшие цифровые продукты в России",
+                "activity": "Онлайн-экосистема, основанная на финансовых и лайфстайл-услугах",
+                "logo": "/logos/Тинькофф-eRLhfQXPb.jpg",
+                "internship": true,
+                "projects": [
+                  {
+                    "status": "review",
+                    "_id": "5f8c709fd18f723e90120944",
+                    "name": "Электронный лабораторный журнал",
+                    "description": "Необходимо разработать систему организации исследовательской деятельности, в основе которой лежит командная работа над научным проектом. Система должна обеспечивать возможность создание  протоколов исследований, календарных планов, отслеживание вклада участников проекта, возможность сохранения данных на локальном сервере их однозначной маркировкой, отслеживание расходных материалов лаборатории.",
+                    "faculty": "Факультет информационных технологий",
+                    "vacancies": [
+                      {
+                          "_id": "5f8c709fd18f723e90120945",
+                          "name": "NodeJS-разработчик",
+                          "description": "Backend на nodejs",
+                          "quantity": 1
+                      },
+                      {
+                          "_id": "5f8c709fd18f723e90120946",
+                          "name": "React-разработчик",
+                          "description": "Fontend на react",
+                          "quantity": 2
+                      }
+                    ],
+                    "curators": [
+                      "5f8c63b9041a2dd79435c6eb"
+                    ],
+                    "createdAt": "2020-10-18T16:43:11.544Z"
+                  }
+                ]
+              }
+              
         404:
           body:
             properties:
-              message: String
+              message:
+                type: String
+                description: Сообщение об ошибке
+            example:
+              {
+                "message": "Компания не найдена"
+              }
   
 /projects:
   description: Запросы для работы с проектами
@@ -106,53 +374,184 @@ protocols: HTTPS
       200:
         body:
           properties:
-            name: String
-            description: String
-            faculty: String
-            company: Object
-            vacancies: Object
-            curators: Object
-            status: String
-            createdAt: Date
+            _id:
+              type: ObjectId
+              description: ID проекта
+            name: 
+              type: String
+              description: Название проекта
+            description:
+              type: String
+              description: Описание проекта
+            faculty:
+              type: String
+              description: Факультет проекта
+            company:
+              type: Object
+              description: Компания проекта
+              required: false
+            vacancies:
+              type: Object
+              description: Вакансии проекта
+              required: false
+            curators:
+              type: Object
+              description: Кураторы проекта
+            status:
+              type: String
+              description: Состояние проекта
+            createdAt:
+              type: Date
+              description: Дата создания проекта
+          example:
+            [
+              {
+                "status": "review",
+                "_id": "5f8c709fd18f723e90120944",
+                "name": "Электронный лабораторный журнал",
+                "description": "Необходимо разработать систему организации исследовательской деятельности, в основе которой лежит командная работа над научным проектом. Система должна обеспечивать возможность создание  протоколов исследований, календарных планов, отслеживание вклада участников проекта, возможность сохранения данных на локальном сервере их однозначной маркировкой, отслеживание расходных материалов лаборатории.",
+                "faculty": "Факультет информационных технологий",
+                "company": {
+                    "_id": "5f8c700f4260fb3e68365c8d",
+                    "name": "Тинькофф",
+                    "description": "Тинькофф — технологическая компания с банковской лицензией. Примерно 70% сотрудников штаб-квартиры — IT-специалисты, которые каждый день создают лучшие цифровые продукты в России",
+                    "activity": "Онлайн-экосистема, основанная на финансовых и лайфстайл-услугах",
+                    "logo": "/logos/Тинькофф-eRLhfQXPb.jpg",
+                    "internship": true,
+                    "projects": [
+                        "5f8c709fd18f723e90120944",
+                        "5f8c712bd18f723e90120947"
+                    ]
+                },
+                "vacancies": [
+                    {
+                        "_id": "5f8c709fd18f723e90120945",
+                        "name": "NodeJS-разработчик",
+                        "description": "Backend на nodejs",
+                        "quantity": 1
+                    },
+                    {
+                        "_id": "5f8c709fd18f723e90120946",
+                        "name": "React-разработчик",
+                        "description": "Fontend на react",
+                        "quantity": 2
+                    }
+                ],
+                "curators": [
+                    {
+                        "_id": "5f8c63b9041a2dd79435c6eb",
+                        "name": "Марина",
+                        "surname": "Даньшина",
+                        "status": "curator"
+                    }
+                ],
+                "createdAt": "2020-10-18T16:43:11.544Z"
+              },
+            ]
   post:
     description: Добавление проекта
     body:
       properties:
-        name: String
-        description: String
-        faculty: String
-        company: Object
-        vacancies: Object
-        curators: Object
-        status: String
-        createdAt: Date
+        name: 
+          type: String
+          description: Название проекта
+        description:
+          type: String
+          description: Описание проекта
+        faculty:
+          type: String
+          description: Факультет проекта
+        company:
+          type: ObjectId
+          description: Компания проекта
+          required: false
+        vacancies:
+          type: Array
+          description: Вакансии проекта
+          required: false
+        curators:
+          type: Array
+          description: Кураторы проекта
+      example:
+        {
+          "name": "Электронный лабораторный журнал",
+          "description": "Необходимо разработать систему организации исследовательской деятельности, в основе которой лежит командная работа над научным проектом. Система должна обеспечивать возможность создание  протоколов исследований, календарных планов, отслеживание вклада участников проекта, возможность сохранения данных на локальном сервере их однозначной маркировкой, отслеживание расходных материалов лаборатории.",
+          "faculty": "Факультет информационных технологий",
+          "company": "5f8c700f4260fb3e68365c8d",
+          "vacancies": [
+              {
+                  "_id": "5f8c709fd18f723e90120945",
+                  "name": "NodeJS-разработчик",
+                  "description": "Backend на nodejs",
+                  "quantity": 1
+              },
+              {
+                  "_id": "5f8c709fd18f723e90120946",
+                  "name": "React-разработчик",
+                  "description": "Fontend на react",
+                  "quantity": 2
+              }
+          ],
+          "curators": ["5f8c63b9041a2dd79435c6eb"],
+        },
     responses:
       201:
         body:
           properties:
-            name: String
-            description: String
-            faculty: String
-            company: Object
-            vacancies: Object
-            curators: Object
-            status: String
-            createdAt: Date
-  /active:
-    get:
-      description: Получение всех проектов с активным статусом
-      responses:
-        200:
-          body:
-            properties:
-              name: String
-              description: String
-              faculty: String
-              company: Object
-              vacancies: Object
-              curators: Object
-              status: String
-              createdAt: Date
+            _id:
+              type: ObjectId
+              description: ID проекта
+            name: 
+              type: String
+              description: Название проекта
+            description:
+              type: String
+              description: Описание проекта
+            faculty:
+              type: String
+              description: Факультет проекта
+            company:
+              type: Object
+              description: Компания проекта
+              required: false
+            vacancies:
+              type: Object
+              description: Вакансии проекта
+              required: false
+            curators:
+              type: Object
+              description: Кураторы проекта
+            status:
+              type: String
+              description: Состояние проекта
+            createdAt:
+              type: Date
+              description: Дата создания проекта
+          example:
+            {
+              "status": "review",
+              "_id": "5f8c709fd18f723e90120944",
+              "name": "Электронный лабораторный журнал",
+              "description": "Необходимо разработать систему организации исследовательской деятельности, в основе которой лежит командная работа над научным проектом. Система должна обеспечивать возможность создание  протоколов исследований, календарных планов, отслеживание вклада участников проекта, возможность сохранения данных на локальном сервере их однозначной маркировкой, отслеживание расходных материалов лаборатории.",
+              "faculty": "Факультет информационных технологий",
+              "company": "5f8c700f4260fb3e68365c8d",
+              "vacancies": [
+                  {
+                      "_id": "5f8c709fd18f723e90120945",
+                      "name": "NodeJS-разработчик",
+                      "description": "Backend на nodejs",
+                      "quantity": 1
+                  },
+                  {
+                      "_id": "5f8c709fd18f723e90120946",
+                      "name": "React-разработчик",
+                      "description": "Fontend на react",
+                      "quantity": 2
+                  }
+              ],
+              "curators": ["5f8c63b9041a2dd79435c6eb"],
+              "createdAt": "2020-10-18T16:43:11.544Z"
+            }
 /users:
   description: Запросы для работы с пользователями
   get:
@@ -161,16 +560,62 @@ protocols: HTTPS
       200:
         body:
           properties:
-            name: String
-            surname: String
-            status: String
+            _id:
+              type: ObjectId
+              description: ID пользователя
+            name: 
+              type: String
+              description: Имя пользователя
+            surname:
+              type: String
+              description: Фамилия пользователя
+            status:
+              type: String
+              description: Тип пользователя
+          example:
+            {
+              "_id": "5f8c6393041a2dd79435c6ea",
+              "name": "Максим",
+              "surname": "Хоцевич",
+              "status": "student"
+            }
   /{id}:
+    uriParameters:
+      id:
+        type: ObjectId
+        description: ID пользователя
     get:
       description: Получение конкретного пользователей
       responses:
         200:
           body:
             properties:
-              name: String
-              surname: String
-              status: String
+              _id:
+                type: ObjectId
+                description: ID пользователя
+              name: 
+                type: String
+                description: Имя пользователя
+              surname:
+                type: String
+                description: Фамилия пользователя
+              status:
+                type: String
+                description: Тип пользователя
+            example:
+              {
+                "_id": "5f8c6393041a2dd79435c6ea",
+                "name": "Максим",
+                "surname": "Хоцевич",
+                "status": "student"
+              }
+        404:
+          body:
+            properties:
+              message:
+                type: String
+                description: Сообщение об ошибке
+            example:
+              {
+                "message": "Пользователь не найден"
+              }

@@ -15,7 +15,7 @@ const schema = new Schema(
 			ref: 'User',
 			required: true,
 		},
-		date: {
+		createdAt: {
 			type: Date,
 			required: true,
 			default: Date.now,

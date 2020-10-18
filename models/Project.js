@@ -19,13 +19,32 @@ const schema = new Schema(
 			ref: 'Company',
 		},
 		vacancies: {
-			type: [Types.ObjectId],
-			ref: 'Vacancy',
+			type: [
+				{
+					name: {
+						type: String,
+						required: true,
+					},
+					description: {
+						type: String,
+						required: true,
+					},
+					quantity: {
+						type: Number,
+						required: true,
+					},
+				},
+			],
 			default: undefined,
 		},
 		curators: {
-			type: [Types.ObjectId],
-			ref: 'User',
+			type: [
+				{
+					type: Types.ObjectId,
+					ref: 'User',
+					required: true,
+				},
+			],
 			required: true,
 			default: undefined,
 		},

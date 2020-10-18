@@ -16,7 +16,7 @@ const { companyValidators } = require('../utils/validators')
 // GET /v1/companies
 router.get('/', async (req, res) => {
 	try {
-		const companies = await Company.find()
+		const companies = await Company.find().populate('projects', '-company')
 		return res.status(200).json(companies)
 	} catch (e) {
 		console.log(e)
@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
 // GET /v1/companies/:id
 router.get('/:id', async (req, res) => {
 	try {
-		const company = await Company.findById(req.params.id)
+		const company = await Company.findById(req.params.id).populate('projects')
 		if (company) {
 			return res.status(200).json(company)
 		} else {
@@ -53,7 +53,7 @@ router.post('/', companyValidators, async (req, res) => {
 		if (!req.files) {
 			return res.status(400).json({ message: 'Загрузите логотип компании' })
 		}
-		const { name, description, activity, internship, projects } = req.body
+		const { name, description, activity, internship } = req.body
 		const { logo } = req.files
 		if (!logo) {
 			return res.status(400).json({ message: 'Загрузите логотип компании' })
@@ -67,7 +67,6 @@ router.post('/', companyValidators, async (req, res) => {
 			activity,
 			logo: `/${logoName}`,
 			internship,
-			projects,
 		})
 		await logo.mv(path.resolve(__dirname, '..', 'uploads', logoName))
 		await company.save()

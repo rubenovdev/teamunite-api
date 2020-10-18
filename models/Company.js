@@ -24,8 +24,12 @@ const schema = new Schema(
 			required: true,
 		},
 		projects: {
-			type: [Types.ObjectId],
-			ref: 'Project',
+			type: [
+				{
+					type: Types.ObjectId,
+					ref: 'Project',
+				},
+			],
 			default: undefined,
 		},
 	},

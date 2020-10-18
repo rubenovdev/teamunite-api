@@ -7,17 +7,18 @@ const router = Router()
 
 // Models
 const Project = require('../models/Project')
+const Company = require('../models/Company')
 
 // Validators
 const { projectValidators } = require('../utils/validators')
+const e = require('express')
 
 // GET /v1/projects
 router.get('/', async (req, res) => {
 	try {
 		const projects = await Project.find()
-			.populate('company')
 			.populate('curators')
-			.populate('vacancies')
+			.populate('company')
 
 		return res.status(200).json(projects)
 	} catch (e) {
@@ -70,8 +71,18 @@ router.post('/', projectValidators, async (req, res) => {
 			company,
 			vacancies,
 			curators,
-    })
-    await project.save()
+		})
+		await project.save()
+
+		const selectedCompany = await Company.findById(company)
+		if (selectedCompany) {
+			if (selectedCompany.projects) {
+				selectedCompany.projects = [...selectedCompany.projects, project]
+			} else {
+				selectedCompany.projects = [project]
+			}
+			await selectedCompany.save()
+		}
 		return res.status(201).json(project)
 	} catch (e) {
 		console.log(e)
