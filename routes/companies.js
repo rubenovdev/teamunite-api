@@ -1,5 +1,8 @@
 // Dependencies
+const { validationResult } = require('express-validator')
 const { Router } = require('express')
+const shortid = require('shortid')
+const path = require('path')
 
 // Variables
 const router = Router()
@@ -7,11 +10,14 @@ const router = Router()
 // Models
 const Company = require('../models/Company')
 
+// Validators
+const { companyValidators } = require('../utils/validators')
+
 // GET /v1/companies
 router.get('/', async (req, res) => {
 	try {
 		const companies = await Company.find()
-		res.status(200).json(companies)
+		return res.status(200).json(companies)
 	} catch (e) {
 		console.log(e)
 		return res
@@ -38,9 +44,34 @@ router.get('/:id', async (req, res) => {
 })
 
 // POST /v1/companies
-router.post('/', async (req, res) => {
+router.post('/', companyValidators, async (req, res) => {
 	try {
-		const company = await Company.create(req.body)
+		const errors = validationResult(req)
+		if (!errors.isEmpty()) {
+			return res.status(400).json({ message: errors.array()[0].msg })
+		}
+		if (!req.files) {
+			return res.status(400).json({ message: 'Загрузите логотип компании' })
+		}
+		const { name, description, activity, internship, projects } = req.body
+		const { logo } = req.files
+		if (!logo) {
+			return res.status(400).json({ message: 'Загрузите логотип компании' })
+		}
+
+		const extname = path.extname(logo.name).toLowerCase()
+		const logoName = `logos/${name}-${shortid.generate() + extname}`
+		const company = new Company({
+			name,
+			description,
+			activity,
+			logo: `/${logoName}`,
+			internship,
+			projects,
+		})
+		await logo.mv(path.resolve(__dirname, '..', 'uploads', logoName))
+		await company.save()
+
 		return res.status(201).json(company)
 	} catch (e) {
 		console.log(e)

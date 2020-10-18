@@ -2,24 +2,40 @@
 require('dotenv').config()
 
 // Dependencies
+const fileUpload = require('express-fileupload')
 const compression = require('compression')
 const mongoose = require('mongoose')
 const express = require('express')
 const morgan = require('morgan')
 const helmet = require('helmet')
 const cors = require('cors')
+const path = require('path')
 
 // Variables
 const PORT = process.env.PORT
 const app = express()
 
 // Middleware
+app.use(express.static(path.resolve(__dirname, 'public')))
+app.use(express.static(path.resolve(__dirname, 'uploads')))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(compression())
 app.use(morgan('dev'))
 app.use(helmet())
 app.use(cors())
+app.use(
+	fileUpload({
+		createParentPath: true,
+		abortOnLimit: true,
+		responseOnLimit: JSON.stringify({
+			message: 'Размер файла слишком большой',
+		}),
+		limits: {
+			fileSize: 10 * 1024 * 1024,
+		},
+	}),
+)
 
 // Routes
 app.use('/v1/announcements', require('./routes/announcements'))
