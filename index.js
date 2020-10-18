@@ -43,6 +43,11 @@ app.use('/v1/companies', require('./routes/companies'))
 app.use('/v1/projects', require('./routes/projects'))
 app.use('/v1/users', require('./routes/users'))
 
+// Docs
+app.get('/', (req, res) => {
+	return res.sendFile(path.resolve(__dirname, 'docs', 'index.html'))
+})
+
 const start = async () => {
 	try {
 		// Connect to mongoDB
