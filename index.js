@@ -45,6 +45,10 @@ app.use('/v1/users', require('./routes/users'))
 
 // Docs
 app.get('/', (req, res) => {
+	res.setHeader(
+		'Content-Security-Policy',
+		"default-src * 'self'; script-src * 'self' 'unsafe-inline'; style-src * 'self' 'unsafe-inline'; img-src * 'self' data: https:;",
+	)
 	return res.sendFile(path.resolve(__dirname, 'docs', 'index.html'))
 })
 
