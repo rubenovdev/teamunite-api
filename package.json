@@ -1,29 +1,54 @@
 {
-	"name": "teamunite-api",
-	"version": "1.0.0",
-	"description": "API для teamunite",
-	"main": "index.js",
-	"scripts": {
-		"start": "node index.js",
-		"dev": "nodemon index.js"
-	},
-	"author": "teamunite",
-	"license": "ISC",
-	"dependencies": {
-		"compression": "^1.7.4",
-		"cors": "^2.8.5",
-		"dotenv": "^8.2.0",
-		"express": "^4.17.1",
-		"express-fileupload": "^1.2.0",
-		"express-validator": "^6.6.1",
-		"helmet": "^4.1.1",
-		"mongoose": "^5.10.9",
-		"morgan": "^1.10.0",
-		"shortid": "^2.2.15"
-	},
-	"devDependencies": {
-		"eslint": "^7.12.0",
-		"eslint-config-google": "^0.14.0",
-		"nodemon": "^2.0.5"
-	}
+  "name": "teamunite-api",
+  "version": "1.0.0",
+  "description": "API для teamunite",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "lint": "eslint --debug src/",
+    "lint:write": "eslint --fix --debug src/ ",
+    "prettier": "prettier --write src/**/*.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run lint:write",
+      "git add"
+    ]
+  },
+  "author": "teamunite",
+  "license": "ISC",
+  "dependencies": {
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.0",
+    "express-validator": "^6.6.1",
+    "helmet": "^4.1.1",
+    "mongoose": "^5.10.9",
+    "morgan": "^1.10.0",
+    "shortid": "^2.2.15"
+  },
+  "devDependencies": {
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-node": "^4.1.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.0.0",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.5.0",
+    "nodemon": "^2.0.5",
+    "prettier": "^2.1.2"
+  }
 }

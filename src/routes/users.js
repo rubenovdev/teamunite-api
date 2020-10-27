@@ -1,5 +1,5 @@
 // Dependencies
-const {Router} = require('express')
+const { Router } = require('express')
 
 // Variables
 const router = new Router()
@@ -15,8 +15,8 @@ router.get('/', async (req, res) => {
   } catch (e) {
     console.log(e)
     return res
-        .status(500)
-        .json({message: 'Что-то пошло не так, попробуйте позже'})
+      .status(500)
+      .json({ message: 'Что-то пошло не так, попробуйте позже' })
   }
 })
 
@@ -26,14 +26,13 @@ router.get('/:id', async (req, res) => {
     const user = await User.findById(req.params.id)
     if (user) {
       return res.status(200).json(user)
-    } else {
-      return res.status(400).json({message: 'Пользователь не найден'})
     }
+    return res.status(400).json({ message: 'Пользователь не найден' })
   } catch (e) {
     console.log(e)
     return res
-        .status(500)
-        .json({message: 'Что-то пошло не так, попробуйте позже'})
+      .status(500)
+      .json({ message: 'Что-то пошло не так, попробуйте позже' })
   }
 })
 

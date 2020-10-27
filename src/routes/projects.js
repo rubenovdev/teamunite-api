@@ -1,6 +1,6 @@
 // Dependencies
-const {validationResult} = require('express-validator')
-const {Router} = require('express')
+const { validationResult } = require('express-validator')
+const { Router } = require('express')
 
 // Variables
 const router = new Router()
@@ -10,39 +10,39 @@ const Project = require('../models/Project')
 const Company = require('../models/Company')
 
 // Validators
-const {projectValidators} = require('../utils/validators')
+const { projectValidators } = require('../utils/validators')
 
 // GET /v1/projects
 router.get('/', async (req, res) => {
   try {
     const projects = await Project.find()
-        .populate('curators')
-        .populate('company')
+      .populate('curators')
+      .populate('company')
 
     return res.status(200).json(projects)
   } catch (e) {
     console.log(e)
     return res
-        .status(500)
-        .json({message: 'Что-то пошло не так, попробуйте позже'})
+      .status(500)
+      .json({ message: 'Что-то пошло не так, попробуйте позже' })
   }
 })
 
 // GET /v1/projects/:status
 router.get('/:status', async (req, res) => {
   try {
-    const status = req.params.status
-    const projects = await Project.find({status})
-        .populate('company')
-        .populate('curators')
-        .populate('vacancies')
+    const { status } = req.params
+    const projects = await Project.find({ status })
+      .populate('company')
+      .populate('curators')
+      .populate('vacancies')
 
     return res.status(200).json(projects)
   } catch (e) {
     console.log(e)
     return res
-        .status(500)
-        .json({message: 'Что-то пошло не так, попробуйте позже'})
+      .status(500)
+      .json({ message: 'Что-то пошло не так, попробуйте позже' })
   }
 })
 
@@ -51,7 +51,7 @@ router.post('/', projectValidators, async (req, res) => {
   try {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      return res.status(400).json({message: errors.array()[0].msg})
+      return res.status(400).json({ message: errors.array()[0].msg })
     }
 
     const {
@@ -60,7 +60,7 @@ router.post('/', projectValidators, async (req, res) => {
       faculty,
       company,
       vacancies,
-      curators,
+      curators
     } = req.body
 
     const project = new Project({
@@ -69,7 +69,7 @@ router.post('/', projectValidators, async (req, res) => {
       faculty,
       company,
       vacancies,
-      curators,
+      curators
     })
     await project.save()
 
@@ -86,8 +86,8 @@ router.post('/', projectValidators, async (req, res) => {
   } catch (e) {
     console.log(e)
     return res
-        .status(500)
-        .json({message: 'Что-то пошло не так, попробуйте позже'})
+      .status(500)
+      .json({ message: 'Что-то пошло не так, попробуйте позже' })
   }
 })
 

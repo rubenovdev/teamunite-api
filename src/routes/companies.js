@@ -1,6 +1,6 @@
 // Dependencies
-const {validationResult} = require('express-validator')
-const {Router} = require('express')
+const { validationResult } = require('express-validator')
+const { Router } = require('express')
 const shortid = require('shortid')
 const path = require('path')
 
@@ -11,7 +11,7 @@ const router = new Router()
 const Company = require('../models/Company')
 
 // Validators
-const {companyValidators} = require('../utils/validators')
+const { companyValidators } = require('../utils/validators')
 
 // GET /v1/companies
 router.get('/', async (req, res) => {
@@ -21,8 +21,8 @@ router.get('/', async (req, res) => {
   } catch (e) {
     console.log(e)
     return res
-        .status(500)
-        .json({message: 'Что-то пошло не так, попробуйте позже'})
+      .status(500)
+      .json({ message: 'Что-то пошло не так, попробуйте позже' })
   }
 })
 
@@ -32,14 +32,13 @@ router.get('/:id', async (req, res) => {
     const company = await Company.findById(req.params.id).populate('projects')
     if (company) {
       return res.status(200).json(company)
-    } else {
-      return res.status(404).json({message: 'Компания не найдена'})
     }
+    return res.status(404).json({ message: 'Компания не найдена' })
   } catch (e) {
     console.log(e)
     return res
-        .status(500)
-        .json({message: 'Что-то пошло не так, попробуйте позже'})
+      .status(500)
+      .json({ message: 'Что-то пошло не так, попробуйте позже' })
   }
 })
 
@@ -48,15 +47,15 @@ router.post('/', companyValidators, async (req, res) => {
   try {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      return res.status(400).json({message: errors.array()[0].msg})
+      return res.status(400).json({ message: errors.array()[0].msg })
     }
     if (!req.files) {
-      return res.status(400).json({message: 'Загрузите логотип компании'})
+      return res.status(400).json({ message: 'Загрузите логотип компании' })
     }
-    const {name, description, activity, internship} = req.body
-    const {logo} = req.files
+    const { name, description, activity, internship } = req.body
+    const { logo } = req.files
     if (!logo) {
-      return res.status(400).json({message: 'Загрузите логотип компании'})
+      return res.status(400).json({ message: 'Загрузите логотип компании' })
     }
 
     const extname = path.extname(logo.name).toLowerCase()
@@ -66,7 +65,7 @@ router.post('/', companyValidators, async (req, res) => {
       description,
       activity,
       logo: `/${logoName}`,
-      internship,
+      internship
     })
     await logo.mv(path.resolve(__dirname, '..', 'uploads', logoName))
     await company.save()
@@ -75,8 +74,8 @@ router.post('/', companyValidators, async (req, res) => {
   } catch (e) {
     console.log(e)
     return res
-        .status(500)
-        .json({message: 'Что-то пошло не так, попробуйте позже'})
+      .status(500)
+      .json({ message: 'Что-то пошло не так, попробуйте позже' })
   }
 })
 

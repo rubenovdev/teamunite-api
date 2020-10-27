@@ -1,29 +1,30 @@
 // Dependencies
-const {body} = require('express-validator')
+const { body } = require('express-validator')
 
 // Models
 const Company = require('../models/Company')
 
 exports.companyValidators = [
   body('name', 'Укажите название компании')
-      .exists()
-      .notEmpty()
-      .custom(async value => {
-        try {
-          const candidate = await Company.findOne({name: value})
-          if (candidate) {
-            return Promise.reject(new Error('Данная компания уже существует'))
-          }
-        } catch (e) {
-          return Promise.reject(new Error('Неизвестная ошибка'))
+    .exists()
+    .notEmpty()
+    .custom(async value => {
+      try {
+        const candidate = await Company.findOne({ name: value })
+        if (candidate) {
+          return Promise.reject(new Error('Данная компания уже существует'))
         }
-      }),
+        return false
+      } catch (e) {
+        return Promise.reject(new Error('Неизвестная ошибка'))
+      }
+    }),
   body('description', 'Укажите описание компании').exists().notEmpty(),
   body('activity', 'Укажите сферу деятельности компании').exists().notEmpty(),
   body('internship', 'Укажите доступность стажировок в компании')
-      .exists()
-      .notEmpty()
-      .isBoolean()
+    .exists()
+    .notEmpty()
+    .isBoolean()
 ]
 
 exports.projectValidators = [
