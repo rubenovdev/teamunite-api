@@ -1,7 +1,24 @@
-const { Schema, model } = require('mongoose')
+import mongoose from 'mongoose'
 
-const schema = new Schema(
+const schema = new mongoose.Schema(
   {
+    email: {
+      type: String,
+      required: true,
+      unique: true
+    },
+    password: {
+      type: String,
+      required: true
+    },
+    role: {
+      type: String,
+      required: true,
+      enum: ['student', 'admin', 'teacher']
+    },
+    group: {
+      type: String
+    },
     name: {
       type: String,
       required: true
@@ -10,13 +27,23 @@ const schema = new Schema(
       type: String,
       required: true
     },
-    status: {
+    patronymic: {
       type: String,
-      required: true,
-      enum: ['student', 'curator', 'admin']
+      required: true
+    },
+    team: {
+      type: mongoose.Types.ObjectId,
+      ref: 'Team'
+    },
+    tasks: {
+      type: [mongoose.Types.ObjectId],
+      ref: 'Task'
     }
   },
-  { versionKey: false }
+  {
+    versionKey: false,
+    timestamps: true
+  }
 )
 
-module.exports = model('User', schema)
+export default mongoose.model('User', schema)
