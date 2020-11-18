@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "API для teamunite",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
@@ -17,7 +18,6 @@
   },
   "lint-staged": {
     "*.js": [
-      "npm run lint:write",
       "git add"
     ]
   },
