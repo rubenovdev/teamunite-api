@@ -13,11 +13,10 @@ const schema = new mongoose.Schema(
     comment: String,
     quantity: { type: Number, default: 1 },
     fields: [{ title: String, kind: String }],
-    points: {
-      comment: String,
-      marks: [{ mark: String, max: String, min: String }]
-    },
-    criteria: [{ title: String, criterion: [{ title: String, max: Number }] }],
+    marks: [{ mark: String, max: String, min: String }],
+    criteriaGroups: [
+      { title: String, criteria: [{ title: String, max: Number }] }
+    ],
     archive: { type: Boolean, default: false }
   },
   {
