@@ -2,7 +2,7 @@ import express from 'express'
 import { createJWT, sendMessage } from '../utils/helper.functions.js'
 import { isLoginValid } from '../validators/auth.validator.js'
 import validate from '../middleware/validate.middleware.js'
-import User from '../models/User.js'
+import { User } from '../models/User.js'
 
 const router = express.Router()
 
