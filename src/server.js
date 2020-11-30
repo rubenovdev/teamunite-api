@@ -26,7 +26,7 @@ server.get('*', (req, res) => {
     'Content-Security-Policy',
     "default-src * 'self'; script-src * 'self' 'unsafe-inline'; style-src * 'self' 'unsafe-inline'; img-src * 'self' data: https:;"
   )
-  return res.sendFile(path.resolve(__dirname, '..', 'public', 'index.html'))
+  return res.sendFile(path.resolve(__dirname, '..', 'docs', 'index.html'))
 })
 
 export default server
