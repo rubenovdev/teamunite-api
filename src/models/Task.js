@@ -2,93 +2,23 @@ import mongoose from 'mongoose'
 
 const schema = new mongoose.Schema(
   {
-    owner: {
-      type: mongoose.Types.ObjectId,
-      ref: 'User',
-      required: true
-    },
-    title: {
-      type: String,
-      required: true
-    },
-    groups: {
-      type: [String],
-      required: true
-    },
-    curators: {
-      type: mongoose.Types.ObjectId,
-      ref: 'User',
-      required: true
-    },
-    retake: {
-      type: Boolean,
-      required: true,
-      default: false
-    },
-    description: {
-      type: String,
-      required: true
-    },
-    descriptionFile: {
-      type: String
-    },
-    deadline: {
-      type: Date,
-      required: true
-    },
-    comment: {
-      type: String
-    },
-    quantity: {
-      type: Number,
-      required: true,
-      default: 1
-    },
-    fields: {
-      type: [
-        {
-          title: String,
-          kind: String
-        }
-      ],
-      required: true
-    },
+    owner: { type: mongoose.Types.ObjectId, ref: 'User' },
+    title: String,
+    groups: [String],
+    curators: [{ type: mongoose.Types.ObjectId, ref: 'User' }],
+    retake: { type: Boolean, default: false },
+    description: String,
+    descriptionFile: String,
+    deadline: Date,
+    comment: String,
+    quantity: { type: Number, default: 1 },
+    fields: [{ title: String, kind: String }],
     points: {
-      type: {
-        comment: String,
-        marks: {
-          type: [
-            {
-              mark: Number,
-              max: Number,
-              min: Number
-            }
-          ]
-        }
-      },
-      required: true
+      comment: String,
+      marks: [{ mark: String, max: String, min: String }]
     },
-    criteria: {
-      type: [
-        {
-          title: String,
-          criterion: {
-            type: [
-              {
-                title: String,
-                max: Number
-              }
-            ]
-          }
-        }
-      ],
-      required: true
-    },
-    archive: {
-      type: Boolean,
-      required: true,
-      default: false
-    }
+    criteria: [{ title: String, criterion: [{ title: String, max: Number }] }],
+    archive: { type: Boolean, default: false }
   },
   {
     versionKey: false,
@@ -96,4 +26,4 @@ const schema = new mongoose.Schema(
   }
 )
 
-export default mongoose.model('Task', schema)
+export const Task = mongoose.model('Task', schema)
