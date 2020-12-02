@@ -2,19 +2,13 @@ import mongoose from 'mongoose'
 
 const schema = new mongoose.Schema(
   {
-    title: {
-      type: String,
-      required: true
-    },
-    criterion: {
-      type: [
-        {
-          title: String,
-          max: Number
-        }
-      ],
-      required: true
-    }
+    title: String,
+    criterion: [
+      {
+        title: String,
+        max: Number
+      }
+    ]
   },
   {
     versionKey: false,
@@ -22,4 +16,4 @@ const schema = new mongoose.Schema(
   }
 )
 
-export default mongoose.model('Template', schema)
+export const Template = mongoose.model('Template', schema)

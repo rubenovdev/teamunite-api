@@ -1,18 +1,16 @@
 import mongoose from 'mongoose'
+import { config } from './config/config.js'
 
-import config from './config/config.js'
-
-const mongodbOptions = {
+const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
   useFindAndModify: false
 }
 
-export default async () => {
+export const connect = async () => {
   try {
-    await mongoose.connect(config.MONGODB_URI, mongodbOptions)
-    console.log('Connected to MongoDB')
+    await mongoose.connect(config.MONGODB_URI, options)
   } catch (e) {
     throw new Error('Error while connecting to MongoDB')
   }
