@@ -6,22 +6,24 @@ import morgan from 'morgan'
 import path from 'path'
 import cors from 'cors'
 
-import authRoutes from './routes/auth.js'
+import { authRoutes } from './routes/auth.js'
+import { tasksRoutes } from './routes/tasks.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const server = express()
+const app = express()
 
-server.use(express.static(path.resolve(__dirname, '..', 'public')))
-server.use(express.urlencoded({ extended: true }))
-server.use(morgan('dev'))
-server.use(express.json())
-server.use(compression())
-server.use(helmet())
-server.use(cors())
+app.use(express.static(path.resolve(__dirname, '..', 'public')))
+app.use(express.urlencoded({ extended: true }))
+app.use(morgan('dev'))
+app.use(express.json())
+app.use(compression())
+app.use(helmet())
+app.use(cors())
 
-server.use('/v1/auth', authRoutes)
+app.use('/v1/auth', authRoutes)
+app.use('/v1/tasks', tasksRoutes)
 
-server.get('*', (req, res) => {
+app.get('*', (req, res) => {
   res.setHeader(
     'Content-Security-Policy',
     "default-src * 'self'; script-src * 'self' 'unsafe-inline'; style-src * 'self' 'unsafe-inline'; img-src * 'self' data: https:;"
@@ -29,4 +31,4 @@ server.get('*', (req, res) => {
   return res.sendFile(path.resolve(__dirname, '..', 'docs', 'index.html'))
 })
 
-export default server
+export default app

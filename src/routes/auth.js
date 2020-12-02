@@ -1,12 +1,19 @@
+import jwt from 'jsonwebtoken'
 import express from 'express'
-import { createJWT, sendMessage } from '../utils/helper.functions.js'
-import { isLoginValid } from '../validators/auth.validator.js'
-import validate from '../middleware/validate.middleware.js'
-import User from '../models/User.js'
+import { sendMessage } from '../utils/responses.js'
+import { loginValid } from '../validators/auth.validator.js'
+import { User } from '../models/User.js'
+import { config } from '../config/config.js'
+import { isValid } from '../middleware/validate.middleware.js'
 
 const router = express.Router()
 
-router.post('/login', isLoginValid, validate, async (req, res) => {
+const createJWT = id => {
+  const options = { expiresIn: '15d' }
+  return jwt.sign({ id }, config.ACCESS_TOKEN_SECRET, options)
+}
+
+router.post('/login', loginValid, isValid, async (req, res) => {
   try {
     const { email, password } = req.body
     const user = await User.findOne({ email })
@@ -23,4 +30,4 @@ router.post('/login', isLoginValid, validate, async (req, res) => {
   }
 })
 
-export default router
+export const authRoutes = router

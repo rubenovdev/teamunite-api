@@ -1,16 +1,12 @@
-import server from './server.js'
-import mongodb from './mongodb.js'
-import config from './config/config.js'
+import app from './app.js'
+import * as mongodb from './mongodb.js'
+import { config } from './config/config.js'
 
-const start = async () => {
-  try {
-    await mongodb()
-    server.listen(process.env.PORT || config.PORT, () =>
-      console.log(`Server is running on port ${config.PORT}`)
+mongodb
+  .connect()
+  .then(() => {
+    app.listen(config.PORT, () =>
+      console.log(`Server is running on port: ${config.PORT}`)
     )
-  } catch (e) {
-    console.log(e)
-  }
-}
-
-start()
+  })
+  .catch(e => console.error(e.message))
