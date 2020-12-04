@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken'
 import express from 'express'
+
 import { sendMessage } from '../utils/responses.js'
 import { loginValid } from '../validators/auth.validator.js'
 import { User } from '../models/User.js'
