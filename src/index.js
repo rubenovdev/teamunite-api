@@ -5,7 +5,7 @@ import { config } from './config/config.js'
 mongodb
   .connect()
   .then(() => {
-    app.listen(config.PORT, () =>
+    app.listen(process.env.PORT || config.PORT, () =>
       console.log(`Server is running on port: ${config.PORT}`)
     )
   })
