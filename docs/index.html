@@ -180,4 +180,99 @@ pre code {
 </code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>message</strong>: <em><span class="required">required</span>(string)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
   "message": "Что-то пошло не так, попробуйте позже"
 }
-</code></pre></div></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#auth">/auth</a></li></ul></div></div></div></div></body></html>
+</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="tasks" class="panel-title">/tasks</h3></div><div class="panel-body"><div class="top-resource-description"><p>Запросы для работы с заданиями</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_tasks"><span class="parent"></span>/tasks</a> <span class="methods"><a href="#tasks_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_tasks" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#tasks_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Получение всех заданий куратора</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="tasks_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/tasks</h4></div><div class="modal-body"><div class="alert alert-info"><p>Получение всех заданий куратора</p></div><ul class="nav nav-tabs"><li class="active"><a href="#tasks_get_request" data-toggle="tab">Request</a></li><li><a href="#tasks_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tasks_get_request"><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em><span class="required">required</span>(string)</em></li></ul></div><div class="tab-pane" id="tasks_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>_id</strong>: <em><span class="required">required</span>(string)</em></li><li><strong>owner</strong>: <em><span class="required">required</span>(string)</em></li><li><strong>title</strong>: <em><span class="required">required</span>(string)</em></li><li><strong>groups</strong>: <em><span class="required">required</span>(array of any)</em></li><li><strong>curators</strong>: <em><span class="required">required</span>(array of any)</em></li><li><strong>retake</strong>: <em><span class="required">required</span>(boolean)</em></li><li><strong>description</strong>: <em><span class="required">required</span>(string)</em></li><li><strong>descriptionFile</strong>: <em><span class="required">required</span>(string)</em></li><li><strong>deadline</strong>: <em><span class="required">required</span>(datetime)</em></li><li><strong>comment</strong>: <em><span class="required">required</span>(string)</em></li><li><strong>quantity</strong>: <em><span class="required">required</span>(number)</em></li><li><strong>fields</strong>: <em><span class="required">required</span>(array of any)</em></li><li><strong>marks</strong>: <em><span class="required">required</span>(array of any)</em></li><li><strong>criteriaGroups</strong>: <em><span class="required">required</span>(array of any)</em></li><li><strong>archive</strong>: <em><span class="required">required</span>(boolean)</em></li><li><strong>createdAt</strong>: <em><span class="required">required</span>(datetime)</em></li><li><strong>updatedAt</strong>: <em><span class="required">required</span>(datetime)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "_id": "5fc63bea5159b72768baad64",
+  "owner": "5fbe5aa3e36336344c1d8bf9",
+  "title": "Интернет магазин кактусов",
+  "groups": [
+    "181-323",
+    "181-324"
+  ],
+  "curators": [
+    "5fbe5aa3e36336344c1d8bf9",
+    "5fbe5aa3e36336344c1d8bfe"
+  ],
+  "retake": false,
+  "description": "Задание на ИП 2020 заключается в создании интернет-магазин Кактусов\nЗадание можно выполнять одному, тогда нужно будет выполнить только одну часть задания (или сайт или мобильное приложение). Так же можно выполнять в паре, тогда вам необходимо представить на сдачу и сайт и мобильное приложение.",
+  "descriptionFile": null,
+  "deadline": "2020-12-15T22:30:00",
+  "comment": null,
+  "quantity": 3,
+  "fields": [
+    {
+      "title": "Ссылка на гит",
+      "kind": "input"
+    },
+    {
+      "title": "Ссылка на макет",
+      "kind": "input"
+    }
+  ],
+  "marks": [
+    {
+      "mark": "Зачет",
+      "max": 100,
+      "min": 55
+    },
+    {
+      "mark": "Не зачет",
+      "max": 54,
+      "min": 0
+    }
+  ],
+  "criteriaGroups": [
+    {
+      "title": "Реализация проекта",
+      "criteria": [
+        {
+          "title": "Проект выложен на сервере fit.mospolytech.ru",
+          "max": 2
+        },
+        {
+          "title": "Создать репозиторий проекта, вести разработку в нем с использованием веток",
+          "max": 3
+        },
+        {
+          "title": "Разработка адаптивной верстки - минимум для трех размеров экранов",
+          "max": 3
+        },
+        {
+          "title": "Использование внешних CSS и JS библиотек",
+          "max": 5
+        },
+        {
+          "title": "Использование Webpack",
+          "max": 5
+        },
+        {
+          "title": "Использование GraphQL",
+          "max": 10
+        },
+        {
+          "title": "Single Page Application (React, Angular, Vue.js)",
+          "max": 10
+        }
+      ]
+    },
+    {
+      "title": "Документация",
+      "criteria": [
+        {
+          "title": "Анализ аналогов (поиск отечественных и зарубежных сайтов, анализ структуры сайта, юзабилити, функциональности)",
+          "max": 5
+        },
+        {
+          "title": "Разработка и тестирование (архитектура проекта, структура базы данных, типовые запросы к БД, алгоритмы, ПМИ и т.д.)",
+          "max": 5
+        },
+        {
+          "title": "Проектирование (обзор кейсов использования сайтов, CJM, выбор функционала, проектирование бизнес-процессов и т.д.)",
+          "max": 5
+        }
+      ]
+    }
+  ],
+  "archive": false,
+  "createdAt": "2020-12-15T22:30:00",
+  "updatedAt": "2020-12-15T22:30:00"
+}</code></pre></div></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#auth">/auth</a></li><li><a href="#tasks">/tasks</a></li></ul></div></div></div></div></body></html>
