@@ -7,16 +7,17 @@ const schema = new mongoose.Schema(
     groups: [String],
     curators: [{ type: mongoose.Types.ObjectId, ref: 'User' }],
     retake: { type: Boolean, default: false },
+    deadline: Date,
+    quantity: { type: Number, default: 1 },
+    options: Number,
     description: String,
     descriptionFile: String,
-    deadline: Date,
     comment: String,
-    quantity: { type: Number, default: 1 },
     fields: [{ title: String, kind: String }],
-    marks: [{ mark: String, max: String, min: String }],
     criteriaGroups: [
       { title: String, criteria: [{ title: String, max: Number }] }
     ],
+    marks: [{ mark: String, max: String, min: String }],
     archive: { type: Boolean, default: false }
   },
   {
