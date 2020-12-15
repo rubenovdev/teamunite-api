@@ -28,6 +28,7 @@ types:
       deadline: datetime
       comment: string
       quantity: number
+      options: number
       fields: array
       marks: array
       criteriaGroups: array
@@ -74,3 +75,34 @@ types:
       200:
         body:
           type: Task
+      400:
+        body:
+          type: Message
+  post:
+    description: Добавление задания
+    headers:
+      Authorization: string
+    body:
+      type: object
+      properties:
+        title: string
+        groups: array
+        curators: array
+        retake: boolean
+        description: string
+        descriptionFile: string
+        deadline: datetime
+        comment: string
+        quantity: number
+        options: number
+        fields: array
+        marks: array
+        criteriaGroups: array
+      example: !include ./create-task.sample
+    responses:
+      200:
+        body:
+          type: Task
+      400:
+        body:
+          type: Message
